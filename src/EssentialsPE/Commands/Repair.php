@@ -46,7 +46,7 @@ class Repair extends BaseCommand{
                 return false;
             }
             foreach ($sender->getInventory()->getContents() as $i => $item) {
-				if (Items::isRepairable($item)) {
+				if ($this->getAPI()->isRepairable($item)) {
 					$item->setDamage(0);
 					$sender->getInventory()->setItem($i, $item);
 				}
