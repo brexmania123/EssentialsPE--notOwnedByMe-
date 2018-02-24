@@ -46,11 +46,13 @@ class Repair extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }
-            foreach($sender->getInventory()->getContents() as $item){
-                if($this->getAPI()->isRepairable($item)){
-                    $item->setDamage(0);
-                }
-            }
+            foreach ($items = $sender->getInventory()->getContents() as $item) {
+				if (Items::isRepairable($item)) {
+					$item->setDamage(0);
+				}
+			}
+			$sender->getInventory()->setContents($items, true);
+			}
             $m = TextFormat::GREEN . "§dAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
                 foreach($sender->getInventory()->getArmorContents() as $item){
