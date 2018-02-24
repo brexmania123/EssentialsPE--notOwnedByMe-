@@ -65,7 +65,7 @@ class Repair extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be repaired!");
                 return false;
             }
-            $sender->getInventory()->getItemInHand()->setDamage(0);
+            $sender->getInventory()->getItemInHand();
             $m = TextFormat::GREEN . "§dItem successfully repaired!";
         }
         $sender->sendMessage($m);
