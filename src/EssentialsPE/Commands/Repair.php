@@ -18,7 +18,6 @@ class Repair extends BaseCommand{
         parent::__construct($api, "repair", "Repair items in your inventory", "[all|hand]", false, ["fix"]);
         $this->setPermission("essentials.repair.use");
     }
-
     /**
      * @param CommandSender $sender
      * @param string $alias
@@ -46,19 +45,18 @@ class Repair extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }
-            foreach ($items = $sender->getInventory()->getContents() as $item) {
+            foreach ($sender->getInventory()->getContents() as $i => $item) {
 				if (Items::isRepairable($item)) {
 					$item->setDamage(0);
+					$sender->getInventory()->setItem($i, $item);
 				}
 			}
-			$sender->getInventory()->setContents($items, true);
-			}
-    	    }
             $m = TextFormat::GREEN . "§dAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
-                foreach($sender->getInventory()->getArmorContents() as $item){
-                    if($this->getAPI()->isRepairable($item)){
+                foreach($items = $sender->getInventory()->getArmorContents() as $item) {
+                    if($this->getAPI()->isRepairable($item)) {
                         $item->setDamage(0);
+                        $sender->getInventory()->setItem($i, $item);
                     }
                 }
                 $m .= TextFormat::AQUA . " §d(Including the equipped Armor)";
