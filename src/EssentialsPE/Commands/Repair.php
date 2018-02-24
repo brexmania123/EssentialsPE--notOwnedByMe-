@@ -64,7 +64,7 @@ class Repair extends BaseCommand{
             }
         }else{
 	foreach($sender->getInventory()->getContents() as $i => $item) {
-            if(!$this->getAPI()->isRepairable($sender->getInventory()->getItemInHand(), $item->setDamage(0), $sender->getInventory()->setItem($i, $item);
+            if(!$this->getAPI()->isRepairable($sender->getInventory()->getItemInHand(), $item->setDamage(0), $sender->getInventory()->setItem($i, $item)));
                 $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be repaired!");
                 return false;
             }
