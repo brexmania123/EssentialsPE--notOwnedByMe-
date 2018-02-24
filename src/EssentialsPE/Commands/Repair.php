@@ -68,7 +68,6 @@ class Repair extends BaseCommand{
                 return false;
             }
             $sender->getInventory()->getItemInHand();
-	    $item->setDamage(0);
 	    $sender->getInventory()->setItem($i, $item);
             $m = TextFormat::GREEN . "§dItem successfully repaired!";
         }
